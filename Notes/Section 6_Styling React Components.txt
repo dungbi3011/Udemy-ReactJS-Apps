@@ -1,0 +1,78 @@
+Section 6: Styling React Components
+
+
+
+- Inline Styles:
+	+) Static Inline Styles:
+For instance: 
+<h1 style={{
+	color: "red",
+	font-size: 2rem
+}}>
+
+	+) Dynamic Inline Styles:
+For instance: 
+<input
+	type="email"
+	style={{
+		backgroundColor: emailNotValid ? "red" : "white"
+	}}
+	onChange={(event) => handleInputChange("email", event.target.value)}
+/>
+
+
+
+- CSS Modules: 
+	+) Change filename from "Header.css" to "Header.module.css"
+	+) Class/ID components for styling can only be captured by the file contains this .css file (Header.jsx in this context)
+	+) For instance: 
+File Header.module.css : .paragraph {text-align: center}
+File Header.jsx:							File AuthInputs.jsx:
+<h1 className="paragraph">Hello</h1>					<p className="paragraph">Hello</p>
+	IT WORKS! 								IT DOES NOT WORK!
+
+
+
+- Styled Components: 
+	+) Static styling
+For instance:
+
+import {styled} from "styled-components";
+
+const Input = styled.input`						const Header = styled.header`
+	//CSS code written here (to style the inputs)				//CSS code to style the header
+`									`
+<Input></Input>								<Header></Header>
+
+	+) Dynamic Styling
+For instance: 
+
+const Label = styled.label`
+	color: ${ ({$invalid}) => $invalid ? "red" : "green"};
+`
+// first $ is for inserting dynamic content, second $ is for preventing warnings
+
+	+) Styling the component's children (use the & symbol representing the parent component):
+const Header = styled.header`
+	//CSS code for header
+	//styling header's image and paragraph
+	& img {
+		width: 11rem;
+	}
+
+	& p {
+		text-align: center;
+	}
+`
+
+
+
+
+- Tailwind CSS Styling: 
+	+) Download to your project: 
+Terminal (references: https://tailwindcss.com/docs/guides/vite): 
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+	+) Implement step-by-step guides on above link
+	+) Use CSS style as className

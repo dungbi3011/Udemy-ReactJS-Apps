@@ -1,0 +1,54 @@
+Section 4: React Essentials - Deep Dive
+
+- ReactJS's function can only return 1 value (1 <div>, 1 <Fragment>...) 
+=> Wrap all elements using <Fragment>...<Fragment/> or <>...</>
+
+- Components should be separated into different files, so that functions can work independently
+For instance, in the start-project, Header generates random first-word, while Examples re-update the UI to display buttons' content. 
+=> By separating into different files (Header.jsx, Examples.jsx, CoreConcepts.jsx), 
+App.jsx looks cleaner & functions work independently
+
+- "...randomWord" can stand for every additional element of the function (id, className, ...)
+For example: 
+export default function Section({title, children, ...props}) {
+    return (
+        <section {...props}>
+            <h2>{title}</h2>
+            {children}
+        </section>
+    );
+}
+
+- Props can stand for every value in the element
+For example: 
+//buttons stand for every value between <menu></menu>	
+export default function Tabs({children, buttons}) 
+    return (
+        <>
+            <menu>{buttons}</menu>
+            {children}
+        </>
+    );
+}
+
+- Dynamic element can also be written like this:
+<ButtonsContainer>{buttons}</ButtonsContainer>
+		then 
+In other file, just call <Tabs ButtonsContainer = "menu"></Tabs> 
+=> Pass in element or function name only such as ButtonsContainer = {Section}
+
+Note: ButtonsContainer (points to value) is different from buttonsContainer (points to component)
+However, a new variable can be initialized to points to the attribute created
+For example:
+export default function Tabs({children, buttons, buttonsContainer}) {
+    const ButtonsContainer = buttonsContainer;
+    
+    return (
+        <>
+            <ButtonsContainer>{buttons}</ButtonsContainer>
+            {children}
+        </>
+    );
+}
+
+- 
